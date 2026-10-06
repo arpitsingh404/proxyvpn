@@ -1,0 +1,15 @@
+# Packed artifacts — never commit
+*.crx
+*.pem
+*.zip
+
+# Dependencies
+node_modules/
+
+# OS / editor junk
+.DS_Store
+Thumbs.db
+desktop.ini
+*.log
+.vscode/
+.idea/

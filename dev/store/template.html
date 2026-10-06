@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>ProxyVPN — store screenshot</title>
+    <style>
+      * { box-sizing: border-box; }
+      html, body {
+        margin: 0;
+        width: 1280px;
+        height: 800px;
+        overflow: hidden;
+      }
+      body {
+        font-family: "Inter", "Segoe UI", system-ui, -apple-system, Roboto, sans-serif;
+        color: #e8eefc;
+        background:
+          radial-gradient(900px 600px at 78% -10%, rgba(124, 58, 237, 0.32), transparent 62%),
+          radial-gradient(1100px 700px at 8% 110%, rgba(59, 130, 246, 0.28), transparent 60%),
+          #05080f;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 64px;
+        padding: 56px 72px;
+      }
+
+      .shot {
+        flex: 0 0 auto;
+        height: 690px;
+        border-radius: 16px;
+        overflow: hidden;
+        border: 1px solid #223050;
+        box-shadow: 0 40px 90px rgba(0, 0, 0, 0.65);
+        background: #070b14;
+      }
+      .shot img {
+        display: block;
+        height: 690px;
+        width: auto;
+      }
+
+      .copy {
+        max-width: 470px;
+      }
+      .brand {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        margin-bottom: 26px;
+      }
+      .mark {
+        width: 40px;
+        height: 40px;
+        border-radius: 11px;
+        background: linear-gradient(140deg, #3b82f6, #7c3aed);
+        box-shadow: 0 10px 26px rgba(59, 130, 246, 0.45);
+        position: relative;
+      }
+      .mark::after {
+        content: "";
+        position: absolute;
+        inset: 10px 11px;
+        border: 2px solid rgba(255, 255, 255, 0.95);
+        border-radius: 3px 3px 8px 8px;
+        border-top-width: 3px;
+      }
+      .brand span {
+        font-size: 15px;
+        font-weight: 700;
+        letter-spacing: 0.4px;
+        color: #9fb0d0;
+      }
+      h1 {
+        margin: 0 0 14px;
+        font-size: 42px;
+        line-height: 1.1;
+        letter-spacing: -0.6px;
+      }
+      p.sub {
+        margin: 0 0 26px;
+        font-size: 18px;
+        line-height: 1.5;
+        color: #93a3c4;
+      }
+      ul {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+      }
+      li {
+        display: flex;
+        align-items: center;
+        gap: 11px;
+        font-size: 16px;
+        color: #cdd8ee;
+      }
+      li::before {
+        content: "";
+        flex: 0 0 auto;
+        width: 22px;
+        height: 22px;
+        border-radius: 50%;
+        background: rgba(16, 185, 129, 0.16);
+        border: 1px solid rgba(16, 185, 129, 0.5);
+        background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path fill='none' stroke='%2334d399' stroke-width='3.4' stroke-linecap='round' stroke-linejoin='round' d='M5 13l4 4L19 7'/></svg>");
+        background-size: 13px;
+        background-position: center;
+        background-repeat: no-repeat;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="shot"><img id="img" alt="" /></div>
+    <div class="copy">
+      <div class="brand"><span class="mark"></span><span>PROXYVPN FOR CHROME</span></div>
+      <h1 id="title"></h1>
+      <p class="sub" id="sub"></p>
+      <ul>
+        <li id="b1"></li>
+        <li id="b2"></li>
+        <li id="b3"></li>
+      </ul>
+    </div>
+
+    <script>
+      const p = new URLSearchParams(location.search);
+      const set = (id, key) => {
+        const el = document.getElementById(id);
+        const v = p.get(key) || "";
+        el.textContent = v;
+        if (!v && (id === "b1" || id === "b2" || id === "b3")) {
+          el.parentElement && el.parentElement.removeChild(el);
+        }
+      };
+      document.getElementById("img").src = p.get("img");
+      set("title", "title");
+      set("sub", "sub");
+      set("b1", "b1");
+      set("b2", "b2");
+      set("b3", "b3");
+    </script>
+  </body>
+</html>

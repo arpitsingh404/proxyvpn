@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>ProxyVPN — UI preview</title>
+    <link rel="stylesheet" href="../popup.css" />
+    <style>
+      /* Preview harness only — shows the 380px popup on a desktop backdrop. */
+      body {
+        width: auto !important;
+        min-height: 100vh;
+        background: radial-gradient(900px 480px at 50% -10%, #16233d, #060911 65%);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 26px 16px 42px;
+        gap: 14px;
+      }
+      .preview-note {
+        max-width: 420px;
+        margin: 0;
+        text-align: center;
+        color: #7c8bab;
+        font: 12px/1.6 "Segoe UI", system-ui, sans-serif;
+      }
+      .preview-note strong {
+        color: #e8eefc;
+      }
+      .preview-note code {
+        color: #93c5fd;
+        font-size: 11px;
+      }
+      .frame {
+        width: 380px;
+        border: 1px solid #1e2a44;
+        border-radius: 16px;
+        overflow: hidden;
+        background: #070b14;
+        box-shadow: 0 26px 70px rgba(0, 0, 0, 0.6);
+      }
+      .frame-bar {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        padding: 9px 11px;
+        background: #0b1324;
+        border-bottom: 1px solid #1e2a44;
+      }
+      .frame-bar i {
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+      }
+      .frame-bar i.r { background: #ef4444; }
+      .frame-bar i.y { background: #f59e0b; }
+      .frame-bar i.g { background: #10b981; }
+      .frame-bar span {
+        margin-left: 6px;
+        color: #56658a;
+        font: 11px "Segoe UI", system-ui, sans-serif;
+      }
+    </style>
+  </head>
+  <body>
+    <p class="preview-note">
+      <strong>ProxyVPN — live UI preview.</strong><br />
+      Same <code>popup.html</code>, <code>popup.css</code> and <code>popup.js</code>
+      as the extension, with a mocked <code>chrome.*</code> API and sample
+      profiles. Safe to click around — nothing is installed or changed.
+    </p>
+
+    <div class="frame">
+      <div class="frame-bar">
+        <i class="r"></i><i class="y"></i><i class="g"></i>
+        <span>chrome-extension://proxyvpn/popup.html</span>
+      </div>
+      <div class="frame-body">
+        
+            <div class="app">
+              <!-- ============ header ============ -->
+              <header class="app-header">
+                <span class="logo" aria-hidden="true"></span>
+                <div class="titles">
+                  <h1>ProxyVPN</h1>
+                  <p id="subtitle">Direct connection</p>
+                </div>
+                <button id="settingsBtn" class="icon-btn" type="button" title="Settings" aria-label="Settings">
+                  <svg viewBox="0 0 24 24" width="17" height="17">
+                    <path
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="1.8"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      d="M12 15.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7Z"
+                    />
+                    <path
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="1.8"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 1 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.6 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 1 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.6a1.65 1.65 0 0 0 1-1.51V3a2 2 0 1 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9v.09a1.65 1.65 0 0 0 1.51 1H21a2 2 0 1 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1Z"
+                    />
+                  </svg>
+                </button>
+              </header>
+        
+              <!-- ============ hero / status ============ -->
+              <section class="hero" id="hero">
+                <div class="hero-top">
+                  <span class="pill" id="statePill"><span class="dot"></span><span id="stateText">Direct</span></span>
+                  <label class="switch" title="Toggle proxy">
+                    <input type="checkbox" id="enableToggle" />
+                    <span class="slider"></span>
+                  </label>
+                </div>
+        
+                <div class="hero-body">
+                  <div class="hero-name" id="heroName">No proxy selected</div>
+                  <div class="hero-addr mono" id="heroAddr">Add a profile to begin</div>
+                </div>
+        
+                <div class="metrics">
+                  <div class="metric">
+                    <span class="metric-label">Exit IP</span>
+                    <span class="metric-line">
+                      <span class="metric-value mono" id="exitIp">—</span>
+                      <button id="checkIpBtn" class="icon-btn icon-btn-xs" type="button" title="Check exit IP" aria-label="Check exit IP">
+                        <svg viewBox="0 0 24 24" width="13" height="13">
+                          <path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                            d="M21 12a9 9 0 1 1-3-6.7M21 4v5h-5" />
+                        </svg>
+                      </button>
+                    </span>
+                  </div>
+                  <div class="metric">
+                    <span class="metric-label">Latency</span>
+                    <span class="metric-value mono" id="latency">—</span>
+                  </div>
+                </div>
+              </section>
+        
+              <!-- ============ profiles ============ -->
+              <section class="panel" id="profilesPanel">
+                <div class="panel-head">
+                  <h2>Profiles</h2>
+                  <button id="newProfileBtn" class="btn small primary" type="button">
+                    <svg viewBox="0 0 24 24" width="13" height="13"><path fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" d="M12 5v14M5 12h14"/></svg>
+                    Add
+                  </button>
+                </div>
+        
+                <div class="search" id="searchWrap">
+                  <svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true">
+                    <path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" d="M11 19a8 8 0 1 0 0-16 8 8 0 0 0 0 16ZM21 21l-4.3-4.3" />
+                  </svg>
+                  <input id="searchInput" type="text" placeholder="Search profiles…" autocomplete="off" />
+                </div>
+        
+                <ul id="profileList" class="profile-list"></ul>
+        
+                <div id="emptyState" class="empty hidden">
+                  <span class="empty-ico" aria-hidden="true"></span>
+                  <p class="empty-title">No proxy profiles yet</p>
+                  <p class="empty-sub">Add an HTTP or SOCKS proxy to get started.</p>
+                </div>
+              </section>
+        
+              <!-- ============ add / edit form ============ -->
+              <form id="profileForm" class="panel form hidden" autocomplete="off">
+                <div class="panel-head">
+                  <h2 id="formTitle">New profile</h2>
+                  <button id="cancelFormBtn" class="icon-btn" type="button" title="Cancel" aria-label="Cancel">
+                    <svg viewBox="0 0 24 24" width="16" height="16"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" d="M6 6l12 12M18 6L6 18"/></svg>
+                  </button>
+                </div>
+                <input type="hidden" id="f_id" />
+        
+                <label class="field">
+                  <span>Name</span>
+                  <input id="f_name" placeholder="US East — SOCKS5" />
+                </label>
+        
+                <div class="grid-2">
+                  <label class="field">
+                    <span>Type</span>
+                    <select id="f_scheme">
+                      <option value="http">HTTP</option>
+                      <option value="https">HTTPS</option>
+                      <option value="socks4">SOCKS4</option>
+                      <option value="socks5">SOCKS5</option>
+                    </select>
+                  </label>
+                  <label class="field">
+                    <span>Port</span>
+                    <input id="f_port" inputmode="numeric" placeholder="8080" />
+                  </label>
+                </div>
+        
+                <label class="field">
+                  <span>Host / IP</span>
+                  <input id="f_host" placeholder="127.0.0.1" />
+                </label>
+        
+                <div class="grid-2">
+                  <label class="field">
+                    <span>Username <em>optional</em></span>
+                    <input id="f_user" placeholder="—" />
+                  </label>
+                  <label class="field">
+                    <span>Password <em>optional</em></span>
+                    <div class="pw">
+                      <input id="f_pass" type="password" placeholder="—" />
+                      <button id="togglePw" class="icon-btn" type="button" title="Show password" aria-label="Show password">
+                        <svg viewBox="0 0 24 24" width="15" height="15"><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3" fill="none" stroke="currentColor" stroke-width="1.8"/></svg>
+                      </button>
+                    </div>
+                  </label>
+                </div>
+        
+                <label class="field">
+                  <span>Bypass list</span>
+                  <textarea id="f_bypass" rows="2" placeholder="localhost, 127.0.0.1, *.internal"></textarea>
+                </label>
+        
+                <div class="form-actions">
+                  <span id="formError" class="form-error"></span>
+                  <button class="btn primary" type="submit">Save profile</button>
+                </div>
+              </form>
+        
+              <!-- ============ settings ============ -->
+              <section id="settingsPanel" class="panel hidden">
+                <div class="panel-head">
+                  <h2>Settings</h2>
+                  <button id="closeSettingsBtn" class="icon-btn" type="button" title="Close" aria-label="Close">
+                    <svg viewBox="0 0 24 24" width="16" height="16"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" d="M6 6l12 12M18 6L6 18"/></svg>
+                  </button>
+                </div>
+        
+                <label class="setting">
+                  <span>
+                    <strong>Auto-connect on startup</strong>
+                    <em>Re-enable the last proxy when Chrome starts</em>
+                  </span>
+                  <span class="switch switch-sm">
+                    <input type="checkbox" id="setAutoConnect" />
+                    <span class="slider"></span>
+                  </span>
+                </label>
+        
+                <label class="setting">
+                  <span>
+                    <strong>Show toolbar badge</strong>
+                    <em>Display ON / ! on the extension icon</em>
+                  </span>
+                  <span class="switch switch-sm">
+                    <input type="checkbox" id="setShowBadge" />
+                    <span class="slider"></span>
+                  </span>
+                </label>
+        
+                <p class="settings-note">
+                  Credentials are stored locally in Chrome and never sent anywhere by this extension.
+                </p>
+              </section>
+        
+              <footer class="foot">
+                <span>Local-only · no telemetry</span>
+                <span id="version" class="muted"></span>
+              </footer>
+            </div>
+        
+            <div id="toast" class="toast" role="status" aria-live="polite"></div>
+      </div>
+    </div>
+
+    <script>
+      /*
+       * Preview-only chrome.* mock.
+       *
+       * Loaded by the generated dev/preview.html so the real popup.js can run in a
+       * normal browser tab (no extension APIs available there). It mirrors the
+       * background worker's message handlers with in-memory sample data.
+       */
+      (function () {
+        const seed = [
+          {
+            id: "p_demo1",
+            name: "US East — SOCKS5",
+            scheme: "socks5",
+            host: "203.0.113.10",
+            port: 1080,
+            username: "",
+            password: "",
+            bypassList: ["localhost", "127.0.0.1"],
+          },
+          {
+            id: "p_demo2",
+            name: "EU HTTP (auth)",
+            scheme: "http",
+            host: "proxy.eu.example.com",
+            port: 8080,
+            username: "demo",
+            password: "secret",
+            bypassList: ["localhost", "127.0.0.1", "*.internal"],
+          },
+          {
+            id: "p_demo3",
+            name: "Local Tor",
+            scheme: "socks5",
+            host: "127.0.0.1",
+            port: 9050,
+            username: "",
+            password: "",
+            bypassList: ["localhost", "127.0.0.1"],
+          },
+        ];
+      
+        let state = {
+          profiles: seed,
+          activeId: "p_demo1",
+          enabled: true,
+          settings: { autoConnect: false, showBadge: true },
+        };
+        let lastError = "";
+      
+        const active = () => state.profiles.find((p) => p.id === state.activeId) || null;
+      
+        const handlers = {
+          getState: () => ({ ok: true, state, active: active(), lastError }),
+          setEnabled: ({ value }) => {
+            state.enabled = !!value;
+            return { ok: true, state, active: active(), lastError };
+          },
+          selectProfile: ({ id, enable = true }) => {
+            state.activeId = id;
+            if (enable) state.enabled = true;
+            return { ok: true, state, active: active(), lastError };
+          },
+          saveProfile: ({ profile }) => {
+            const clean = Object.assign({}, profile);
+            if (!clean.id) clean.id = "p_" + Math.random().toString(36).slice(2, 8);
+            clean.port = Number(clean.port) || 8080;
+            clean.bypassList = String(clean.bypassList || "")
+              .split(/\s*,\s*/)
+              .filter(Boolean);
+            const i = state.profiles.findIndex((p) => p.id === clean.id);
+            if (i >= 0) state.profiles[i] = clean;
+            else state.profiles.push(clean);
+            if (!state.activeId) state.activeId = clean.id;
+            return { ok: true, state, active: active() };
+          },
+          deleteProfile: ({ id }) => {
+            state.profiles = state.profiles.filter((p) => p.id !== id);
+            if (state.activeId === id)
+              state.activeId = state.profiles[0] ? state.profiles[0].id : null;
+            return { ok: true, state, active: active() };
+          },
+          updateSettings: ({ settings }) => {
+            state.settings = Object.assign({}, state.settings, settings);
+            return { ok: true, state, active: active() };
+          },
+          testConnection: () =>
+            new Promise((resolve) =>
+              setTimeout(
+                () =>
+                  resolve({
+                    ok: true,
+                    ip: state.enabled ? "203.0.113.10" : "198.51.100.7",
+                    ms: 42,
+                  }),
+                650
+              )
+            ),
+        };
+      
+        window.chrome = {
+          runtime: {
+            id: "preview",
+            getManifest: () => ({ version: "1.1.0" }),
+            sendMessage: (msg) => {
+              const fn = handlers[msg.type];
+              return Promise.resolve(
+                fn ? fn(msg.payload || {}) : { ok: false, error: "unknown message: " + msg.type }
+              );
+            },
+          },
+        };
+      
+        // Popups cannot show native confirm(); auto-confirm deletes so the preview works.
+        window.confirm = () => true;
+      })();
+    </script>
+    <script src="../popup.js"></script>
+  </body>
+</html>

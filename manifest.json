@@ -1,0 +1,35 @@
+{
+  "manifest_version": 3,
+  "name": "ProxyVPN — Proxy Profile Switcher",
+  "short_name": "ProxyVPN",
+  "version": "1.1.0",
+  "description": "One-click proxy switching for Chrome. Save named proxy servers and toggle them like a VPN.",
+  "minimum_chrome_version": "116",
+  "permissions": [
+    "proxy",
+    "storage",
+    "webRequest",
+    "webRequestAuthProvider"
+  ],
+  "host_permissions": [
+    "<all_urls>"
+  ],
+  "background": {
+    "service_worker": "background.js",
+    "type": "module"
+  },
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "ProxyVPN",
+    "default_icon": {
+      "16": "icons/icon16.png",
+      "48": "icons/icon48.png",
+      "128": "icons/icon128.png"
+    }
+  },
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  }
+}
