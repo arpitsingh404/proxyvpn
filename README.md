@@ -1,10 +1,16 @@
 # ProxyVPN — Proxy Profile Switcher
 
+[![Chrome Extension](https://img.shields.io/badge/Chrome-Manifest%20V3-4285F4?logo=googlechrome&logoColor=white)](#install-load-unpacked)
+[![JavaScript](https://img.shields.io/badge/JavaScript-ES2022-F7DF1E?logo=javascript&logoColor=black)](#how-it-works)
+[![License: MIT](https://img.shields.io/badge/license-MIT-2ea44f)](LICENSE)
+
 A lightweight Chrome extension that turns Chrome's proxy settings into a simple
 on/off switch. Save named **HTTP / HTTPS / SOCKS4 / SOCKS5** proxies and toggle
 them like a VPN — one click to route through a proxy, one click to go direct.
 
 Built with **Manifest V3**. No account, no telemetry, no remote code.
+
+**Repository:** <https://github.com/arpitsingh404/proxyvpn>
 
 ![ProxyVPN popup](dev/docs/ui-live.png)
 
@@ -152,6 +158,9 @@ Packaging and listing copy are ready in
 ## License
 
 MIT — see [LICENSE](LICENSE). © 2026 Arpit Singh.
+
+- GitHub: [@arpitsingh404](https://github.com/arpitsingh404)
+- Repository: [proxyvpn](https://github.com/arpitsingh404/proxyvpn)
 
 > **Authorized use only.** Use only with proxies and networks you are authorised
 > to use. You are responsible for complying with all applicable laws.
